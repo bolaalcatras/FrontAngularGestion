@@ -4,6 +4,9 @@
   <thead>
     <tr>
       <th>
+        Fecha
+      </th>
+      <th>
         Monto
       </th>
       <th>
@@ -16,6 +19,9 @@
   </thead>
   @for (item of transacciones; track $index){
   <tr>
+    <td>
+      {{item.fecha}}
+    </td>
     <td>
         {{item.monto}}
     </td>
@@ -34,11 +40,22 @@
 
 @if (formTransaccion) {
   <form [formGroup]="formTransaccion" >
+    <label for="fecha"></label>Fecha
+    <input formControlName="fecha" type="date" id="fecha">
+
   <label for="monto"></label>Monto
   <input formControlName="monto" type="number" id="monto">
 <br>
   <label for="motivo"></label>Motivo
   <input formControlName="motivo" type="text" id="motivo">
+  <label for="tipo"></label>tipo
+  <select formControlName="type_id" id="type_id">
+    <option [value]="null">Seleccione un tipo</option>
+    @for (item of tipoTransacciones; track $index) {
+      <option [value]="item.id">{{item.tipoTransaccion}}</option>
+    }
+  </select>
+  
   <button (click)="cancelarTransaccion()">Cancelar</button>
   <button (click)="guardarTransaccion()">Guardar</button>
   

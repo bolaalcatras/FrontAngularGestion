@@ -2,7 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { CreateTransaccionDTO } from '@shared/dto/create-transaccion-dto.';
+import { TipoTransaccionModel } from '@shared/models/tipo-transaccion-model';
 import { TransaccionModel } from '@shared/models/transaccion-model';
+import { TipoTransaccionService } from '@shared/services/tipo-transaccion.service';
+import { TransaccionService } from '@shared/services/transaccion.service';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -12,12 +17,18 @@ import { TransaccionModel } from '@shared/models/transaccion-model';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent  implements OnInit{
 
   private formBuilder = inject(FormBuilder);
+
+  private transaccionService =  inject(TransaccionService);
+  private tipoTransaccionService = inject(TipoTransaccionService);
+
   formTransaccion:FormGroup | null = null;
 
+  
 
+  tipoTransacciones:TipoTransaccionModel[] = []
   transacciones:TransaccionModel []= [
     // {
     //   monto: 2000,
@@ -32,11 +43,33 @@ export class AppComponent {
   transaccion:TransaccionModel | null = null;
   indexTransaccion:number | null = null
 
+  ngOnInit(): void {
+    this.getData();
+  }
+
+  getData(){
+    const dataSub = forkJoin([
+      this.transaccionService.getAll(),
+      this.tipoTransaccionService.getAll()
+    ]).subscribe({
+      next:([transacciones,tipoTransacciones]) => {
+        this.transacciones = [...transacciones];
+        this.tipoTransacciones = [...tipoTransacciones];
+      },
+      complete(){
+        dataSub.unsubscribe()
+      }
+    })
+    
+  }
+
   crearTransaccion(){
   
     this.formTransaccion = this.formBuilder.group({
-      monto:new FormControl(0,[Validators.required]),
-      motivo:new FormControl('',[Validators.required])
+      monto:new FormControl(null,[Validators.required]),
+      fecha:new FormControl(null,[Validators.required]),
+      motivo:new FormControl(null,[Validators.required]),
+      type_id:new FormControl(null,[Validators.required])
     })
   }
 
@@ -50,24 +83,24 @@ export class AppComponent {
     return
     }
     const {value} = this.formTransaccion;
-    const nuevaTransaccion:TransaccionModel = value as TransaccionModel;
+    const nuevaTransaccion:CreateTransaccionDTO = value as CreateTransaccionDTO;
 
-    if(this.indexTransaccion!==null){
-    let transacciones = [...this.transacciones];
-      transacciones[this.indexTransaccion] = nuevaTransaccion
-      this.transacciones = [...transacciones]
-      this.formTransaccion = null;
-      this.indexTransaccion = null;
-      return
-    } 
-    this.transacciones = [...this.transacciones,nuevaTransaccion]
+    const saveSub = this.transaccionService.create(nuevaTransaccion).subscribe({
+      next:(transaccion) => {
+        this.transacciones = [...this.transacciones,transaccion];
+      },
+      complete:()=>{
+        saveSub.unsubscribe
+      },
+    })
+
     this.formTransaccion = null;
     
   }
 
-  eliminarTransaccion(index:number){
+  eliminarTransaccion(id:number){
     const trasacciones = [...this.transacciones];
-    trasacciones.splice(index,1);
+    trasacciones.splice(id);
     this.transacciones = trasacciones;
   }
 
@@ -76,8 +109,10 @@ export class AppComponent {
     this.transaccion = transaccion;
     this.indexTransaccion = index;
     this.formTransaccion = this.formBuilder.group({
-      monto:new FormControl(transaccion.monto,[Validators.required]),
-      motivo:new FormControl(transaccion.motivo,[Validators.required])
+      monto:new FormControl(null,[Validators.required]),
+      fecha:new FormControl(null,[Validators.required]),
+      motivo:new FormControl(null,[Validators.required]),
+      type_id:new FormControl(null,[Validators.required])
     })
   }
   
