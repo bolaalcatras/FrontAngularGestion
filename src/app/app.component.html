@@ -29,8 +29,8 @@
       {{item.motivo}}
     </td>
     <td>
-      <button (click)="eliminarTransaccion($index)">Eliminar</button>
-      <button (click)="actualizarTrasaccion($index,item)">Actualizar</button>
+      <button (click)="eliminarTransaccion(item.id)">Eliminar</button>
+      <button (click)="actualizarTrasaccion(item)">Actualizar</button>
     </td>
   </tr>
 }@empty {

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '@env/environment.development';
-import { CreateTransaccionDTO } from '@shared/dto/create-transaccion-dto.';
+import { CreateTransaccionDTO } from '@shared/dto/create-transaccion-dto';
+import { UpdateTransaccionDTO } from '@shared/dto/update-transaccion.dto';
 import { TipoTransaccionModel } from '@shared/models/tipo-transaccion-model';
 import { TransaccionModel } from '@shared/models/transaccion-model';
 
@@ -27,8 +28,13 @@ export class TransaccionService {
     return this.http.post<TransaccionModel>(this.URL,data)
   }
 
-  delete(id:CreateTransaccionDTO){
-    return this.http.delete<TransaccionModel>(`${this.URL}/${id}`)
+  delete(id:number){
+    return this.http.delete(`${this.URL}/${id}`)
+  }
+
+  update(data:UpdateTransaccionDTO){
+    const {id} = data;
+    return this.http.put<TransaccionModel>(`${this.URL}/${id}`,data)
   }
 
 
