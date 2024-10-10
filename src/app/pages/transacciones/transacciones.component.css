@@ -8,6 +8,7 @@ body {
 
 /* Seccin */
 section {
+    position: relative;
     background: #fff;
     border-radius: 8px;
     margin: 30px;
@@ -25,9 +26,46 @@ button {
     transition: background-color 0.2s;
 }
 
-button:hover {
-    background-color: #2b2b2c;
+.crear-button {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+
 }
+
+section button {
+    padding: 5px 10px;
+}
+
+.button-box {
+    display: flex;
+}
+
+button {
+    display: flex;
+    position: relative;
+    align-items: center;
+    gap: 3px;
+}
+
+.button-box .sub-text {
+    opacity: 0;
+    top: -40px;
+    position: absolute;
+    border-radius: 10px;
+    padding: 10px;
+    left: 50%;
+    background-color: #074b05;
+    transform: translate(-50%, 0) rotate(90deg);
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.button-box button:hover .sub-text {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
 
 /* Tabla */
 table {
@@ -36,11 +74,12 @@ table {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-select{
+select {
     margin-right: 50px;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     text-align: left;
 }
@@ -65,12 +104,11 @@ label {
     font-weight: bold;
 }
 
-input{
+input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: solid 1px grey;   
+    border: solid 1px grey;
     border-radius: 5px;
 
 }
-

@@ -1,5 +1,5 @@
 <section>
-<Button (click)="crearTransaccion()">Crear</Button>
+<Button class="crear-button" (click)="crearTransaccion()">Crear</Button>
 <table>
   <thead>
     <tr>
@@ -29,8 +29,24 @@
       {{item.motivo}}
     </td>
     <td>
-      <button (click)="eliminarTransaccion(item.id)">Eliminar</button>
-      <button (click)="actualizarTrasaccion(item)">Actualizar</button>
+      <div class="button-box">
+        <button class="delete-button" (click)="eliminarTransaccion(item.id)">
+          <span  class="material-symbols-outlined">
+            delete
+          </span>
+          <span class="sub-text">
+            Eliminar
+          </span>
+        </button>
+        <button (click)="actualizarTrasaccion(item)">
+          <span class="material-symbols-outlined">
+            upgrade
+            </span>
+            <span class="sub-text">
+              Actualizar
+            </span>
+        </button>
+      </div>
     </td>
   </tr>
 }@empty {
@@ -55,7 +71,6 @@
       <option [value]="item.id">{{item.tipoTransaccion}}</option>
     }
   </select>
-  
   <button (click)="cancelarTransaccion()">Cancelar</button>
   <button (click)="guardarTransaccion()">Guardar</button>
   
