@@ -1,0 +1,34 @@
+section{
+    display: flex;
+    justify-content: center;
+    font-family: Arial, sans-serif;;
+    
+}
+
+div{
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 200px;
+    align-items: center;
+    justify-content: center;
+    background-color: rosybrown;
+    border-radius: 10px;
+}
+div .boton{
+    display: flex;
+    align-items: flex-start;
+}
+button{
+    height: 40px;
+    width: 80px;
+    border-radius: 10px;
+    align-items: flex-start;
+}
+
+
+input{
+    border-radius: 10px;
+    border: 0.5px solid black;
+    height: 30px;
+}

@@ -56,14 +56,14 @@ button {
     padding: 10px;
     left: 50%;
     background-color: #074b05;
-    transform: translate(-50%, 0) rotate(90deg);
+    transform: translate(-50%, 0) rotate(90deg) scale(0);
     pointer-events: none;
     transition: 0.5s;
 }
 
 .button-box button:hover .sub-text {
     opacity: 1;
-    transform: rotate(0deg);
+    transform: rotate(0deg) scale(1);
 }
 
 
