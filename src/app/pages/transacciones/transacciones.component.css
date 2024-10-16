@@ -33,6 +33,13 @@ button {
 
 }
 
+.salir-button {
+    position: absolute;
+    left: 380px;
+    top: 5px;
+
+}
+
 section button {
     padding: 5px 10px;
 }

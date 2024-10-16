@@ -6,8 +6,7 @@ import { UpdateTransaccionDTO } from '@shared/dto/update-transaccion.dto';
 import { TipoTransaccionModel } from '@shared/models/tipo-transaccion-model';
 import { TransaccionModel } from '@shared/models/transaccion-model';
 
-const {API_URL} = environment;
- 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +14,7 @@ export class TransaccionService {
 
   private http = inject(HttpClient);
 
-  URL:string = `${API_URL}/transaccion`;
+  URL:string = `transaccion`;
 
   constructor() { 
   }

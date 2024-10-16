@@ -6,6 +6,7 @@ import { UpdateTransaccionDTO } from '@shared/dto/update-transaccion.dto';
 import { TipoTransaccionModel } from '@shared/models/tipo-transaccion-model';
 import { TransaccionModel } from '@shared/models/transaccion-model';
 import { TipoTransaccionService } from '@shared/services/tipo-transaccion.service';
+import { TokenService } from '@shared/services/token.service';
 import { TransaccionService } from '@shared/services/transaccion.service';
 import { forkJoin } from 'rxjs';
 
@@ -19,6 +20,10 @@ import { forkJoin } from 'rxjs';
 export class TransaccionesComponent implements OnInit{
   
   private formBuilder = inject(FormBuilder);
+
+  
+
+  private token_service = inject(TokenService);
 
   private transaccionService = inject(TransaccionService);
   private tipoTransaccionService = inject(TipoTransaccionService);
@@ -140,5 +145,9 @@ export class TransaccionesComponent implements OnInit{
       motivo: new FormControl(transaccion.motivo, [Validators.required]),
       type_id: new FormControl(transaccion.type_id, [Validators.required]),
     });
+  }
+
+  logout(){
+    
   }
 }

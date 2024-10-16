@@ -1,6 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginDTO } from '@shared/dto/login.dto';
+import { AuthService } from '@shared/services/auth.service';
+import { TokenService } from '@shared/services/token.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +13,38 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy{
+
+  private auth_service = inject(AuthService);
+  private token_service = inject(TokenService);
+
+  email:string = '';
+  password:string = '';
+
+  login_sub:Subscription| null = null;
+
+  ngOnDestroy(): void {
+      if(this.login_sub){
+        this.login_sub.unsubscribe();
+      }
+  }
+
+  login(){
+    let data:LoginDTO = {
+      email: this.email,
+      password: this.password
+    }
+
+    this.login_sub = this.auth_service.login(data)
+    .subscribe({
+      next:(token)=>{
+        this.token_service.setToken(token)
+      }
+      
+    })
 
 
+  }
 
+  
 }
