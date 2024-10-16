@@ -17,7 +17,7 @@ import { TipoTransaccionService } from '@shared/services/tipo-transaccion.servic
 import { TransaccionService } from '@shared/services/transaccion.service';
 import { forkJoin } from 'rxjs';
 import { TransaccionesComponent } from "./pages/transacciones/transacciones.component";
-import { LoginComponent } from "./login/login.component";
+import { LoginComponent } from "./pages/login/login.component";
 
 @Component({
   selector: 'app-root',
