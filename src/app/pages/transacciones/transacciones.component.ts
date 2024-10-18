@@ -5,6 +5,7 @@ import { CreateTransaccionDTO } from '@shared/dto/create-transaccion-dto';
 import { UpdateTransaccionDTO } from '@shared/dto/update-transaccion.dto';
 import { TipoTransaccionModel } from '@shared/models/tipo-transaccion-model';
 import { TransaccionModel } from '@shared/models/transaccion-model';
+import { AuthService } from '@shared/services/auth.service';
 import { TipoTransaccionService } from '@shared/services/tipo-transaccion.service';
 import { TokenService } from '@shared/services/token.service';
 import { TransaccionService } from '@shared/services/transaccion.service';
@@ -21,7 +22,7 @@ export class TransaccionesComponent implements OnInit{
   
   private formBuilder = inject(FormBuilder);
 
-  
+  private auth_service = inject(AuthService);
 
   private token_service = inject(TokenService);
 
@@ -148,6 +149,10 @@ export class TransaccionesComponent implements OnInit{
   }
 
   logout(){
-    
+    this.auth_service.logout().subscribe({
+      next: (value) =>{
+        console.log(value)
+      }
+    })
   }
 }

@@ -1,17 +1,43 @@
-<section>
-    <form (submit)="login()">
-    <div class="login">
-        <h1>Login</h1>
-            <label for="email"></label>Email
-            <input [(ngModel)]="email" type="email" name="email" placeholder="jhonalexander2016.com@gmail.com">
+<section class="login">
+    <div class="container-login">
 
-            <label for="password"></label>Password
-            <input [(ngModel)]="password" type="password" name="password" placeholder="123456789">
-            
-        <div class="boton">
-            <button type="submit">Acceder</button> 
+        <div class="animations">
+            <picture>
+                <img src="https://cdn.dribbble.com/userupload/8432950/file/original-0c14504bd291054d76548cb015dff89a.png?resize=1600x1200"
+                    alt>
+            </picture>
+        </div>
+        <div class="form-login">
+            <div class="form-container">
+                <div class="logo">
+                    <picture>
+                        <img src="/sena.ico" alt>
+                    </picture>
+                </div>
+                <div class="welcome">
+                    <h2>Welcome to lissa!</h2>
+                    <span>Please login</span>
+                </div>
+
+                <form #formulario class="form" (submit)="login()">
+                    <div class="container-input">
+                        <label id="email" for="email" [attr.texto]="'Email'"></label>
+                        <input (click)="addFocus()"  [(ngModel)]="email" type="email" name="email" required="">
+                    </div>
+
+                    <div class="container-input">
+                        <label id="password" for="password" [attr.texto]="'Password'"></label>
+                        <input (click)="addFocus()"  [(ngModel)]="password" type="password" name="password">
+                    </div>
+                    <div class="button-login">
+                        <button type="submit">Login</button>
+                    </div>
+                    <div class="button-login-google">
+                        <button type="submit">Login with Google</button>
+                    </div>
+                </form>
+
+            </div>
         </div>
     </div>
-</form>
-
 </section>

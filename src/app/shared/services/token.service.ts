@@ -20,6 +20,6 @@ export class TokenService {
   }
 
   deleteToken(){
-    localStorage.removeItem('token');
+    
   }
 }

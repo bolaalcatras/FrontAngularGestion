@@ -1,54 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-
-section{
+.login{
+    font-family: "Roboto", sans-serif;
     display: flex;
     justify-content: center;
-    font-family: Arial, sans-serif;
-    margin: 10px;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
 }
 
-h1{
-    margin: 3px 3px 3px 0px;
+.container-login{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    max-width: 900px;
+    height: 90%;
+    max-height: 1200px;
+    background-color: #E9E9E9;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.animations{
+    width: 60%;
+}
+
+.animations picture{
+    width: max-content;
+    height: max-content;
+}
+
+.animations picture img{
+    width: 100%;
+    height: 100%;
+}
+
+.form-login{
+    width: 40%;
+    height: 100%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    gap: 20px;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: max-content;
+}
+
+.logo picture{
+    display: flex;
+    width: 120px;
+    height: 120px;
+    background-color: white;
+}
+
+.logo picture img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.welcome{
+    width: 100%;
+    height: max-content;
     text-align: center;
 }
 
-.login{
-    font-size: 12px;
-    padding: 5px;
+.welcome h2{
+    font-size: clamp(10px, 2.5vw, 32px);
+    font-weight: 900;
+    font-style: normal;
+    margin: 5px;
+}
+
+.form{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-    height: 200px;
-    width: 200px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    width: 100%;
+    height: max-content;
+    gap: 10px;
 }
 
-.boton{
-    display: flex;
-    justify-content: space-between;
+.form .container-input{
+    width: 100%;
+    position: relative;
 }
 
-button{
-    margin-top: 4px;
-    height: 40px;
-    width: 80px;
-    border-radius: 10px;
-    color: white;
-    background-color: black;
+.form .container-input input{
+    width: 100%;
     border: none;
+    padding: 8px 0px;
 }
 
-
-input{
-    border-radius: 10px;
-    border: none;
-    height: 30px;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
-    margin-bottom: 5px;
-    font-size: 10px;
-    padding: 5px;
-    
+.form .container-input input:focus{
+    outline: none;
 }
+
+.form .container-input::before{
+    position: absolute;
+    bottom: 0;
+    content: "";
+    width: 100%;
+    height: 0.3px;
+    background-color: gray;
+}
+
+.form .container-input label{
+    position: absolute;
+    top: 7px;
+    left: 5px;
+    color: gray;
+}
+
+.form .container-input label::before{
+    content: attr(texto);
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    top: 0px;
+    left: 1px;
+    font-size: 15px;
+    transition: 0.5s;
+}
+
+.form .container-input.focus label::before{
+    content: attr(texto);
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    top: -15px;
+    left: 1px;
+    font-size: 12px;
+}
+
